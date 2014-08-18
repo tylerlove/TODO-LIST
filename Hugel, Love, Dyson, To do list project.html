@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<title>Page Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="jquery.mobile-1.4.3.min.css" />
+	<script src="jquery-1.11.1.min.js"></script>
+	<script src="jquery.mobile-1.4.3.min.js"></script>
+	<style>
+		.done{
+			text-decoration: line-through;
+		}
+	</style>
+	<script>
+	var myList = [];
+	function addTask(){
+		//alert("hi");
+		if (document.forms["myForm"]["Make"].value > ""){
+			myList.push(document.forms["myForm"]["Make"].value);
+			console.log(myList);
+			document.forms["myForm"]["Make"].value = "";
+			showTasks();
+		}else {
+			alert("Nothing was entered.... please be productive");
+		}
+	}
+	function showTasks(){
+		$("#list").empty();
+		for(var i = 0; i < myList.length; i++){
+			console.log(myList[i]);
+			$("#list").append("<li onclick='removeTask("+i+")'><a href='#'>" + myList[i] + "</a></li>");
+			document.forms["myForm"]["Make"].value = " ";
+			$("#taskUpdate").replaceWith("<p align='center'>GET BUSY</p>");
+
+		}
+		$("#list").listview();
+		$("#list").listview( "refresh" );
+	}
+	
+	function removeTask(index){
+		console.log(myList);
+		console.log(myList[index]);
+		myList.splice(index,1);
+		console.log(myList);
+		showTasks();
+	}
+	</script>
+</head>
+<body>
+	<div data-role="page" style="background-color:#6495ED")>
+		<div data-role="header" style="background-color:#971d0f">
+			<h1 >To Do List</h1>
+		</div>
+		<div role="main" class="ui-content">
+		
+		<form id="myForm" action="tryjsref_form_onsubmit2.htm"> 
+			Whatcha gonna do?: <input type="text" name="Make" /> 
+			<input type="submit" value="Submit " onclick="addTask()"/>
+		</form>
+			
+		<ol data-role="listview" data-split-icon="check" data-inset="true" id="list" >
+		
+		</ol>
+		
+		<script>
+		
+		</script>	
+			<p id = "taskUpdate" align = "center">No Tasks Yet</p>
+		</div>
+		<div data-role="footer">
+			<h4>Get Busy!!!</h4>
+		</div>
+		
+	
+     
+	</div>
+</body>
+</html>
